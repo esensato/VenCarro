@@ -18,5 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.hide() // ocultar a barra de titulo
 
+        supportFragmentManager.beginTransaction().add(R.id.flPrincipal, ListaFragment()).commit()
+
     }
 }
