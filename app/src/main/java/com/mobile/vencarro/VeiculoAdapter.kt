@@ -19,6 +19,8 @@ class VeiculoAdapter(context:Context) : RecyclerView.Adapter<VeiculoHolder>() {
     // URL para obter as marcas de veiculo
     val URL_MARCA = "https://fipeapi.appspot.com/api/1/carros/marcas.json"
 
+    val URL_MODELO = "http://fipeapi.appspot.com/api/1/carros/veiculos/6.json"
+
     var queue : RequestQueue
     // bloco de inicializacao da classe Kotlin
     init {
@@ -29,8 +31,33 @@ class VeiculoAdapter(context:Context) : RecyclerView.Adapter<VeiculoHolder>() {
         queue = Volley.newRequestQueue(context)
 
         val requestMarca = JsonArrayRequest(URL_MARCA,
-                                            Response.Listener { // obtive uma responsta
-                                                    response -> Log.i("VENCAR", response.toString())
+                                            Response.Listener { // obtive uma resposta
+                                                    response ->
+
+                                                Log.i("VENCAR", response.toString())
+
+                                                //adicionar marcas na lista veiculos
+                                                // response é um array de JSONObject
+                                                // obter a qtde de objetos no array
+                                                val qtde = response.length() - 1
+                                                // percorre cada elemento do array
+                                                for (i in 0..qtde){
+
+                                                    // obtem cada uma das marcas
+                                                    // Ex: {"name":"AUDI","fipe_name":"Audi","order":2,"key":"audi-6","id":6}
+                                                    val marca = response.getJSONObject(i)
+
+                                                    // DESAFIO#1 - incluir o id da marca no objeto Veiculo
+                                                    // além do fipe_name
+
+                                                    veiculos.add(Veiculo(marca.getString("fipe_name"),"-", "-"))
+
+                                                }
+
+                                                // avisa o Adapter (lista) que os dados foram atualizados
+                                                notifyDataSetChanged()
+
+
                                             },
                                             Response.ErrorListener { // ocorreu algum erro
                                                     error -> Log.e("VENCAR", error.toString())
@@ -72,6 +99,9 @@ class VeiculoAdapter(context:Context) : RecyclerView.Adapter<VeiculoHolder>() {
             override fun onClick(v: View?) {
 
                 Log.i("VENCARRO", "Objeto = ${veiculos.get(position)}")
+
+                //DESAFIO#2 - efetuar a segunda requisicao passando o id da marca
+                //como parâmetro URL_MODELO
 
             }
 
