@@ -21,4 +21,16 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().add(R.id.flPrincipal, ListaFragment()).commit()
 
     }
+
+    // exibir o fragment com o resumo dos dados do veiculo selecionado
+    // incluindo o preco para que o usuario tire uma foto do veiculo
+    fun exibirResumo(marca:String, modelo:String, ano:String, preco:String) {
+
+        // troca o ListaFragment pelo ResumoFragment
+        supportFragmentManager.beginTransaction().replace(R.id.flPrincipal, ResumoFragment()).commit()
+        // DESAFIO!!!!!!
+        // Implementar a tela de resumo utilizando os slides 31, 32 e 33 como referencia
+
+
+    }
 }
