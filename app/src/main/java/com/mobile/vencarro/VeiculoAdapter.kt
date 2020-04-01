@@ -276,10 +276,14 @@ class VeiculoAdapter(context:Context) : RecyclerView.Adapter<VeiculoHolder>() {
             Response.Listener { // obtive uma resposta (JSONObject)
                     response ->
 
+                // {"referencia":"março de 2020","fipe_codigo":"014062-7","name":"CITY Sedan EXL 1.5 Flex 16V 4p Mec.","combustivel":"Gasolina","marca":"Honda","ano_modelo":"2011","preco":"R$ 33.529,00","key":"city-2011","time":0,"veiculo":"CITY Sedan EXL 1.5 Flex 16V 4p Mec.","id":"2011"}
                 Log.i("VENCAR", response.toString())
                 // aciona a funcao exibirRemumo da MainActivity
                 // esta funcao ira trocar os fragments
-                (context as MainActivity).exibirResumo()
+                (context as MainActivity).exibirResumo(response.getString("marca"),
+                                                       response.getString("name"),
+                                                  response.getString("combustivel") + " - " + response.getString("ano_modelo"),
+                                                       response.getString("preco"))
 
             },
             Response.ErrorListener { // ocorreu algum erro
