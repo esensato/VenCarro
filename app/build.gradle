@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -35,4 +38,13 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.android.support:design:27.1.1'
+
+    implementation group: 'com.cloudant', name: 'cloudant-sync-datastore-android', version:'latest.release'
+
+    implementation "android.arch.persistence.room:runtime:1.0.0"
+    kapt "android.arch.persistence.room:compiler:1.0.0"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
+    androidTestImplementation "android.arch.persistence.room:testing:1.0.0"
+    androidTestImplementation "android.arch.core:core-testing:1.1.0"
+
 }

@@ -12,8 +12,11 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import com.cloudant.sync.documentstore.DocumentRevision
+import com.cloudant.sync.documentstore.DocumentStore
 import kotlinx.android.synthetic.main.fragment_resumo.*
 import kotlinx.android.synthetic.main.fragment_resumo.view.*
+import java.io.File
 
 class ResumoFragment : Fragment(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -66,7 +69,9 @@ class ResumoFragment : Fragment(), BottomNavigationView.OnNavigationItemSelected
         when (item.itemId) {
 
                 R.id.mnuFoto -> tirarFoto()
-                R.id.mnuSalvar -> Log.i("FOTO", "Salvar foto")
+                // enviar os dados do veiculo para um servidor centralizado
+                // aciona a função salvar de MainActivity passando marca, modelo, ano e preco
+                R.id.mnuSalvar -> (context as MainActivity).salvar(marca, modelo, ano, preco)
         }
 
         return true;
